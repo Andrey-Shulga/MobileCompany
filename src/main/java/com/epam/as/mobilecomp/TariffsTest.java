@@ -45,7 +45,7 @@ public class TariffsTest {
 
         //Console Menu with actions.
         while (flag) {
-            System.out.println("Menu. Please enter number of item...");
+            System.out.println("Menu. Please enter number of menu item...");
             System.out.println("1. Show all tariff's plans");
             System.out.println("2. Show all customers");
             System.out.println("3. Sort tariffs by subscription fee.");
@@ -54,37 +54,37 @@ public class TariffsTest {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             int s = Integer.parseInt(reader.readLine());
-
-            switch (s) {
-                case 1:
-                    System.out.println("The list of all tariffs:");
-                    tariffActions.printTariffsToConsole(tariffsList);
-                    System.out.println();
-                    break;
-                case 2:
-                    System.out.print("Number of all customers: ");
-                    tariffActions.calculateAllCustomers(tariffsList);
-                    System.out.println();
-                    break;
-                case 3:
-                    System.out.println("Sort tariffs by fee: ");
-                    tariffActions.sortTariffsByFee(tariffsList);
-                    System.out.println();
-                    break;
-                case 4:
-                    System.out.println("Find tariff by parameters' range: minutes 200-450, mbytes 1000-2500 ");
-                    int fromMin = 200;
-                    int toMin = 450;
-                    int fromMbs = 1000;
-                    int toMbs = 2500;
-                    tariffActions.findTariffByParams(tariffsList, fromMin, toMin, fromMbs, toMbs);
-                    System.out.println();
-                    break;
-                case 5: {
-                    System.out.println("Exit");
-                    System.exit(0);
+            if (s >= 1 && s <= 5) {
+                switch (s) {
+                    case 1:
+                        System.out.println("The list of all tariffs:");
+                        tariffActions.printTariffsToConsole(tariffsList);
+                        System.out.println();
+                        break;
+                    case 2:
+                        System.out.print("Number of all customers: ");
+                        tariffActions.calculateAllCustomers(tariffsList);
+                        System.out.println();
+                        break;
+                    case 3:
+                        System.out.println("Sort tariffs by fee: ");
+                        tariffActions.sortTariffsByFee(tariffsList);
+                        System.out.println();
+                        break;
+                    case 4:
+                        System.out.println("Find tariff by parameters' range: minutes 200-450, mbytes 1000-2500 ");
+                        int fromMin = 200;
+                        int toMin = 450;
+                        int fromMbs = 1000;
+                        int toMbs = 2500;
+                        tariffActions.findTariffByParams(tariffsList, fromMin, toMin, fromMbs, toMbs);
+                        System.out.println();
+                        break;
+                    case 5:
+                        System.out.println("Exit");
+                        System.exit(0);
                 }
-            }
+            } else System.out.println("You entered wrong number, please try again.");
         }
     }
 }
