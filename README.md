@@ -1,3 +1,10 @@
+Matrix Multiplication
+=====================
+This program makes multiplication of two matrices.
+Matrices initialized with random numbers.
+
+
+
 Mobile Company
 ==============
 This program makes new tariffs for MobileCompany.
