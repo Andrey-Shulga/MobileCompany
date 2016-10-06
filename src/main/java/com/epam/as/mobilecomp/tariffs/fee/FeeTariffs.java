@@ -5,7 +5,7 @@ import com.epam.as.mobilecomp.tariffs.Tariffs;
 /**
  * Class for tariffs with subscription fee.
  */
-public class FeeTariffs extends Tariffs {
+public class FeeTariffs extends Tariffs implements Comparable<FeeTariffs> {
     private int fee;
     private int includeMinutes;
     private int includeTraffic;
@@ -59,8 +59,13 @@ public class FeeTariffs extends Tariffs {
      * @return description about tariff with parameters
      */
     public String getDescription() {
-        return "Tariff " + getName() + ". This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludeMinutes() + " min. and " +
+        return "Tariff \"" + getName() + "\".  This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludeMinutes() + " min. and " +
                 getIncludeTraffic() + " mbs.";
+    }
+
+
+    public int compareTo(FeeTariffs other) {
+        return Integer.compare(fee, other.fee);
     }
 
 

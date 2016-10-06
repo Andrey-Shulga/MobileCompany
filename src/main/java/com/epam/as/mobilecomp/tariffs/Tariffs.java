@@ -42,4 +42,5 @@ public abstract class Tariffs {
      * Return description about tariff.
      */
     public abstract String getDescription();
+
 }
