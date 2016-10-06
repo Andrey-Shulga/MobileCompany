@@ -22,8 +22,8 @@ public class TariffsTest {
     public static void main(String[] args) throws IOException {
 
         boolean flag = true;
-        ArrayList<Tariffs> tariffsList = new ArrayList<>();
         TariffActions tariffActions = new TariffActions();
+        ArrayList<Tariffs> tariffsList = new ArrayList<>();
 
         //Add new tariffs with fee in list.
         tariffsList.add(new FeeTariffs("All for 1500!", 400000, true, 1500, 250, 1500));
@@ -43,7 +43,7 @@ public class TariffsTest {
         tariffsList.add(new RegionalTariffs("Mine Capital", 500000, false, "Karaganda", 2, 4, 1));
         tariffsList.add(new RegionalTariffs("Oil Capital", 600000, false, "Aktau", 3, 6, 1));
 
-        //Console Menu
+        //Console Menu with actions.
         while (flag) {
             System.out.println("Menu. Please enter number of item...");
             System.out.println("1. Show all tariff's plans");
