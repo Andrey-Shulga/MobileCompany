@@ -26,16 +26,16 @@ public class TariffsTest {
         ArrayList<Tariffs> tariffsList = new ArrayList<>();
 
         //Add new tariffs with fee in list.
-        tariffsList.add(new FeeTariffs("All for 1500!", 400000, true, 1500, 250, 1500));
-        tariffsList.add(new FeeTariffs("All for 500!", 500000, true, 500, 100, 500));
-        tariffsList.add(new FeeTariffs("All for 3000!", 100000, true, 3000, 350, 2500));
-        tariffsList.add(new FeeTariffs("All for 2000!", 350000, true, 2000, 250, 1500));
-        tariffsList.add(new FeeTariffs("All for 2500!", 300000, true, 2500, 300, 2000));
-        tariffsList.add(new FeeTariffs("All for 1000!", 450000, true, 1000, 200, 1000));
+        tariffsList.add(new FeeTariffs("All for 1500!", 400000, true, 1500, 150, 1500));
+        tariffsList.add(new FeeTariffs("All for 500!", 500000, true, 500, 50, 500));
+        tariffsList.add(new FeeTariffs("All for 3000!", 100000, true, 3000, 300, 2500));
+        tariffsList.add(new FeeTariffs("All for 2000!", 350000, true, 2000, 200, 1500));
+        tariffsList.add(new FeeTariffs("All for 2500!", 300000, true, 2500, 250, 2000));
+        tariffsList.add(new FeeTariffs("All for 1000!", 450000, true, 1000, 100, 1000));
 
         //Add new general tariffs without fee in list.
-        tariffsList.add(new WithoutFeeTariffs("All directions for 10!", 650000, false, 10, 10, 2));
-        tariffsList.add(new WithoutFeeTariffs("Cheap calls in-net for 3!", 750000, false, 3, 15, 2));
+        tariffsList.add(new WithoutFeeTariffs("All directions for 10!", 650000, false, 10, 10, 1));
+        tariffsList.add(new WithoutFeeTariffs("Cheap calls in-net for 3!", 750000, false, 3, 15, 1));
 
         //Add new regional tariffs without fee in list.
         tariffsList.add(new RegionalTariffs("North Capital", 1100000, false, "Astana", 3, 7, 1));
@@ -69,6 +69,15 @@ public class TariffsTest {
                 case 3:
                     System.out.println("Sort tariffs by fee: ");
                     tariffActions.sortTariffsByFee(tariffsList);
+                    System.out.println();
+                    break;
+                case 4:
+                    System.out.println("Find tariff by parameters' range: minutes 200-450, mbytes 1000-2500 ");
+                    int fromMin = 200;
+                    int toMin = 450;
+                    int fromMbs = 1000;
+                    int toMbs = 2500;
+                    tariffActions.findTariffByParams(tariffsList, fromMin, toMin, fromMbs, toMbs);
                     System.out.println();
                     break;
                 case 5: {
