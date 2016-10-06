@@ -3,19 +3,23 @@ package com.epam.as.mobilecomp.tarrifs;
 /**
  * General abstract class for all tariffs.
  */
-public abstract class Tariffs {
+abstract class Tariffs {
 
     private String name;
     private int customers;
+    private boolean isHasFee;
 
     /**
      * Construct new tariff.
+     *
      * @param name the name of new tariff
      * @param customers amount of customers
+     * @param isHasFee has or not fee
      */
-    public Tariffs(String name, int customers){
+    Tariffs(String name, int customers, boolean isHasFee) {
         this.name=name;
         this.customers=customers;
+        this.isHasFee = isHasFee;
     }
 
     public String getName(){
@@ -30,9 +34,12 @@ public abstract class Tariffs {
         this.customers = customers;
     }
 
+    public boolean isHasFee() {
+        return isHasFee;
+    }
+
     /**
      * Return description about tariff.
      */
     public abstract String getDescription();
-
 }
