@@ -1,42 +1,45 @@
 package com.epam.as.mobilecomp;
 
 import com.epam.as.mobilecomp.tariffs.Tariffs;
+import com.epam.as.mobilecomp.tariffs.fee.FeeTariffs;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Actions with tariffs.
  */
 public class TariffActions {
-    private List<Tariffs> list;
 
-    public static void printTariffsToConsole(List<Tariffs> list) {
+
+    public void printTariffsToConsole(List<Tariffs> list) {
         for (Tariffs l : list)
             System.out.println(l.getDescription());
     }
 
-    public static void calculateAllCustomers(List<Tariffs> list) {
+    public void calculateAllCustomers(List<Tariffs> list) {
         int count = 0;
         for (Tariffs l : list)
             count += l.getCustomers();
         System.out.println(count);
     }
 
-    /** public SortedSet<Tariffs> sortedSet=new SortedSet<>
-     (new Comparator<Tariffs>()
-     {
-     @Override public int compare(Tariffs t1, Tariffs t2) {
+    public void sortTariffsByFee(ArrayList<Tariffs> list) {
+        ArrayList<FeeTariffs> sortedlist = new ArrayList<FeeTariffs>();
+        for (Tariffs selected : list)
+            if (selected.isHasFee()) sortedlist.add((FeeTariffs) selected);
 
-     return 0;
-     }
-
-     public int compare(Item a, Item b)
-     {
-     String descrA = a.getDescription();
-     String descrB = b.getDescription();
-     return descrA.compareTo(descrB);
-     }
-     });
-     */
+        Collections.sort(sortedlist, new Comparator<FeeTariffs>() {
+            @Override
+            public int compare(FeeTariffs t1, FeeTariffs t2) {
+                return t1.getFee() - t2.getFee();
+            }
+        });
+        for (FeeTariffs sort : sortedlist)
+            System.out.println(sort);
+        ;
+    }
 
 }

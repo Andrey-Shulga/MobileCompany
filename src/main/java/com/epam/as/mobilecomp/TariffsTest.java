@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This program demonstrates actions with tariffs of Mobile Company.
@@ -20,12 +19,11 @@ import java.util.List;
 
 public class TariffsTest {
 
-    List<Tariffs> tariffsList = new ArrayList<>();
-
     public static void main(String[] args) throws IOException {
 
         boolean flag = true;
-        List<Tariffs> tariffsList = new ArrayList<>();
+        ArrayList<Tariffs> tariffsList = new ArrayList<>();
+        TariffActions tariffActions = new TariffActions();
 
         //Add new tariffs with fee in list.
         tariffsList.add(new FeeTariffs("All for 1500!", 400000, true, 1500, 250, 1500));
@@ -60,13 +58,17 @@ public class TariffsTest {
             switch (s) {
                 case 1:
                     System.out.println("The list of all tariffs:");
-                    TariffActions.printTariffsToConsole(tariffsList);
+                    tariffActions.printTariffsToConsole(tariffsList);
                     System.out.println();
-                    ;
                     break;
                 case 2:
                     System.out.print("Number of all customers: ");
-                    TariffActions.calculateAllCustomers(tariffsList);
+                    tariffActions.calculateAllCustomers(tariffsList);
+                    System.out.println();
+                    break;
+                case 3:
+                    System.out.println("Sort tariffs by fee: ");
+                    tariffActions.sortTariffsByFee(tariffsList);
                     System.out.println();
                     break;
                 case 5: {
