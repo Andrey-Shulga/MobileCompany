@@ -58,6 +58,15 @@ public class TariffActions {
             System.out.println(sort);
     }
 
+    /**
+     * Search tariff by parameters' range.
+     *
+     * @param list    the list of tariffs
+     * @param fromMin initial parameter for search minutes
+     * @param toMin   finial parameter for search minutes
+     * @param fromMbs initial parameter for search megabytes
+     * @param toMbs   finial parameter for search megabytes
+     */
     public void findTariffByParams(ArrayList<Tariffs> list, int fromMin, int toMin, int fromMbs, int toMbs) {
         ArrayList<FeeTariffs> sortedlist = new ArrayList<FeeTariffs>();
 
