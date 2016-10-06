@@ -17,9 +17,9 @@ public class FeeTariffs extends Tariffs {
      * @param name           the name of new tariff
      * @param customers      amount of customers
      * @param isHasFee       has or not fee
-     * @param fee            cost of fee.
-     * @param includeMinutes number of free time (minutes) include in tariff
-     * @param includeTraffic number of free traffic (mbytes) include in tariff
+     * @param fee            cost of fee per month.
+     * @param includeMinutes number of free time (minutes) included in tariff
+     * @param includeTraffic number of free traffic (mbytes) included in tariff
      */
     public FeeTariffs(String name, int customers, boolean isHasFee, int fee, int includeMinutes, int includeTraffic) {
         super(name, customers, isHasFee);
@@ -55,9 +55,11 @@ public class FeeTariffs extends Tariffs {
 
     /**
      * Return description about tariff with parameters.
+     *
+     * @return description about tariff with parameters
      */
     public String getDescription() {
-        return "This tariff with subscription fee $" + getFee() + " per month. Include free " + getIncludeMinutes() + " min. and " +
+        return "This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludeMinutes() + " min. and " +
                 getIncludeTraffic() + " mbs.";
     }
 
