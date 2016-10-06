@@ -37,6 +37,6 @@ public class RegionalTariffs extends WithoutFeeTariffs {
      */
     @Override
     public String getDescription() {
-        return "Only for region " + getRegion() + "! " + super.getDescription();
+        return "Tariff " + getName() + ".Only for region " + getRegion() + "! " + super.getDescription();
     }
 }

@@ -59,7 +59,7 @@ public class FeeTariffs extends Tariffs {
      * @return description about tariff with parameters
      */
     public String getDescription() {
-        return "This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludeMinutes() + " min. and " +
+        return "Tariff " + getName() + ". This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludeMinutes() + " min. and " +
                 getIncludeTraffic() + " mbs.";
     }
 

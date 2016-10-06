@@ -58,7 +58,7 @@ public class WithoutFeeTariffs extends Tariffs {
      * @return description about tariff without fee, with parameters.
      */
     public String getDescription() {
-        return "This tariff without subscription fee, cost of in-net call " + getCostCallInNet() + "(per min.), cost of out-net call "
+        return "Tariff " + getName() + ".This tariff without subscription fee, cost of in-net call " + getCostCallInNet() + "(per min.), cost of out-net call "
                 + getCostCallOutNet() + "(per min.), cost of 1 Mb traffic " + getCostTraffic() + ".";
     }
 }
