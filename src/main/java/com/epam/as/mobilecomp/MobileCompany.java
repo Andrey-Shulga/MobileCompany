@@ -16,4 +16,7 @@ public class MobileCompany {
         this.tariffMap = tariffMap;
     }
 
+    public int getTariffNumberOfClients() {
+        return ((int) Math.random() * 1500000);
+    }
 }

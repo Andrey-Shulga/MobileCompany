@@ -49,7 +49,7 @@ public class TariffTest {
                 ((WithoutFeeTariff) tariff).setTrafficMbCost(trafficMbCost);
             }
 
-            tariffMap.put(tariff, null);
+            tariffMap.put(tariff, company.getTariffNumberOfClients());
         }
 
 
