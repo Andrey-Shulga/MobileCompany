@@ -15,7 +15,7 @@ public class PropertyManager {
 
     private PropertyManager() {
         properties = new Properties();
-        InputStream in = TariffTest.class.getClassLoader().getResourceAsStream("app.properties");
+        InputStream in = TariffTest.class.getClassLoader().getResourceAsStream("tariff.properties");
         try {
             properties.load(in);
         } catch (IOException e) {

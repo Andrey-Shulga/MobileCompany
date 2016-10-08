@@ -5,9 +5,9 @@ package com.epam.as.mobilecomp.entities;
  */
 public class WithoutFeeTariff extends Tariff {
 
-    private int CallInNetCost;
-    private int CallOutNetCost;
-    private int TrafficMbCost;
+    private int callInNetCost;
+    private int callOutNetCost;
+    private int trafficMbCost;
 
     public WithoutFeeTariff() {
     }
@@ -22,33 +22,33 @@ public class WithoutFeeTariff extends Tariff {
      */
     public WithoutFeeTariff(String name, int CallInNetCost, int CallOutNetCost, int TrafficMbCost) {
         super(name);
-        this.CallInNetCost = CallInNetCost;
-        this.CallOutNetCost = CallOutNetCost;
-        this.TrafficMbCost = TrafficMbCost;
+        this.callInNetCost = CallInNetCost;
+        this.callOutNetCost = CallOutNetCost;
+        this.trafficMbCost = TrafficMbCost;
     }
 
     public int getCallInNetCost() {
-        return CallInNetCost;
+        return callInNetCost;
     }
 
     public void setCallInNetCost(int callInNetCost) {
-        this.CallInNetCost = callInNetCost;
+        this.callInNetCost = callInNetCost;
     }
 
     public int getCallOutNetCost() {
-        return CallOutNetCost;
+        return callOutNetCost;
     }
 
     public void setCallOutNetCost(int callOutNetCost) {
-        this.CallOutNetCost = callOutNetCost;
+        this.callOutNetCost = callOutNetCost;
     }
 
     public int getTrafficMbCost() {
-        return TrafficMbCost;
+        return trafficMbCost;
     }
 
     public void setTrafficMbCost(int trafficMbCost) {
-        this.TrafficMbCost = trafficMbCost;
+        this.trafficMbCost = trafficMbCost;
     }
 
     /**

@@ -4,10 +4,10 @@ import com.epam.as.mobilecomp.entities.FeeTariff;
 import com.epam.as.mobilecomp.entities.Tariff;
 import com.epam.as.mobilecomp.entities.WithoutFeeTariff;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.epam.as.mobilecomp.util.PropertyManager.propertyManager;
 
 /**
  * This program demonstrates actions with entities of Mobile Company.
@@ -18,9 +18,42 @@ import java.util.ArrayList;
 
 public class TariffTest {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        final int tariffCount = 8;
+        TariffFactory factory = new TariffFactory();
+        Map<Tariff, Integer> tariffMap = new HashMap<>();
+        MobileCompany company = new MobileCompany("ECell", tariffMap);
 
-        boolean flag = true;
+
+        for (int i = 1; i <= tariffCount; i++) {
+            String tariffType = propertyManager.getProperty("tariff." + i + ".type");
+            Tariff tariff = factory.getTariff(tariffType);
+            if (tariff instanceof FeeTariff) {
+                String name = propertyManager.getProperty("tariff." + i + ".name");
+                int fee = propertyManager.getIntProperty("tariff." + i + ".fee");
+                int includedMinutes = propertyManager.getIntProperty("tariff." + i + ".includedMinutes");
+                int includedTraffic = propertyManager.getIntProperty("tariff." + i + ".includedTraffics");
+                tariff.setName(name);
+                ((FeeTariff) tariff).setFee(fee);
+                ((FeeTariff) tariff).setIncludedMinutes(includedMinutes);
+                ((FeeTariff) tariff).setIncludedTraffic(includedTraffic);
+            }
+            if (tariff instanceof WithoutFeeTariff) {
+                String name = propertyManager.getProperty("tariff." + i + ".name");
+                int callInNetCost = propertyManager.getIntProperty("tariff." + i + ".CallInNetCost");
+                int callOutNetCosts = propertyManager.getIntProperty("tariff." + i + ".CallOutNetCosts");
+                int trafficMbCost = propertyManager.getIntProperty("tariff." + i + ".TrafficMbCost");
+                tariff.setName(name);
+                ((WithoutFeeTariff) tariff).setCallInNetCost(callInNetCost);
+                ((WithoutFeeTariff) tariff).setCallOutNetCost(callOutNetCosts);
+                ((WithoutFeeTariff) tariff).setTrafficMbCost(trafficMbCost);
+            }
+
+            tariffMap.put(tariff, null);
+        }
+
+
+        /**boolean flag = true;
         TariffService tariffService = new TariffService();
         ArrayList<Tariff> tariffsList = new ArrayList<>();
 
@@ -78,6 +111,6 @@ public class TariffTest {
                         System.exit(0);
                 }
             } else System.out.println("You entered wrong number, please try again.");
-        }
+         }*/
     }
 }
