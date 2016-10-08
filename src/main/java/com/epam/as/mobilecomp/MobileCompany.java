@@ -17,6 +17,6 @@ public class MobileCompany {
     }
 
     public int getTariffNumberOfClients() {
-        return ((int) Math.random() * 1500000);
+        return (int) (Math.random() * 1500000);
     }
 }

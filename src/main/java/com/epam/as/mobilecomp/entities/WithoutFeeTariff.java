@@ -13,7 +13,7 @@ public class WithoutFeeTariff extends Tariff {
     }
 
     /**
-     * Construct new entities without fee.
+     * Construct new tariff without fee.
      *
      * @param name           the name of new tariff
      * @param CallInNetCost  cost of call in network per minute
@@ -52,17 +52,22 @@ public class WithoutFeeTariff extends Tariff {
     }
 
     /**
-     * Return description about entities without fee, with parameters.
+     * Return description about tariff without fee, with parameters.
      *
-     * @return description about entities without fee, with parameters.
+     * @return description about tariff without fee, with parameters.
      */
     public String getDescription() {
-        return "Tariff \"" + getName() + "\".  This entities without subscription fee, cost of in-net call " + getCallInNetCost() + " (per min.), cost of out-net call "
+        return "Tariff \"" + getName() + "\".  This tariff without subscription fee, cost of in-net call " + getCallInNetCost() + " (per min.), cost of out-net call "
                 + getCallOutNetCost() + " (per min.), cost of traffic " + getTrafficMbCost() + " (per Mb).";
     }
 
     @Override
     public String getTariffType() {
         return "nofee";
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

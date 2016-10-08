@@ -2,28 +2,35 @@ package com.epam.as.mobilecomp;
 
 import com.epam.as.mobilecomp.entities.FeeTariff;
 import com.epam.as.mobilecomp.entities.Tariff;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 
 /**
- * Actions with entities.
+ * Actions with tariffs.
  */
 public class TariffService {
 
+    Logger logger = LoggerFactory.getLogger("com.epam.as.mobilecomp.TariffService");
+
     /**
-     * Print to console all entities.
+     * Print to console all tariff.
      *
-     * @param list the list of entities
+     * @param tariffMap the list of tariff
      */
-    public void printTariffsToConsole(ArrayList<Tariff> list) {
-        for (Tariff l : list)
-            System.out.println(l.getDescription());
+    public void printTariffsToConsole(Map<Tariff, Integer> tariffMap) {
+        logger.info("The list of all tariffs:");
+        for (Map.Entry m : tariffMap.entrySet()) {
+            logger.info(m.getKey().toString());
+        }
     }
 
     /**
-     * Print to console number of customers for all entities.
+     * Print to  number of customers for all tariff.
      *
      * @param list the list of entities
      */
@@ -35,10 +42,10 @@ public class TariffService {
     }
 
     /**
-     * Print to console list of entities sorted by fee.
+     * Print to console list of tariff sorted by fee.
      * For sort uses Comparator.
      *
-     * @param list the list of entities
+     * @param list the list of tariff
      */
     public void sortTariffsByFee(ArrayList<Tariff> list) {
         ArrayList<FeeTariff> sortedlist = new ArrayList<FeeTariff>();
@@ -61,7 +68,7 @@ public class TariffService {
     /**
      * Search entities by parameters' range.
      *
-     * @param list    the list of entities
+     * @param list    the list of tariff
      * @param fromMin initial parameter for search minutes
      * @param toMin   finial parameter for search minutes
      * @param fromMbs initial parameter for search megabytes

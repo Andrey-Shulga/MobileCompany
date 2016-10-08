@@ -13,7 +13,7 @@ public class FeeTariff extends Tariff {
     }
 
     /**
-     * Construct new entities with fee.
+     * Construct new tariff with fee.
      *
      * @param name           the name of new tariff
      * @param fee            cost of fee per month.
@@ -53,19 +53,19 @@ public class FeeTariff extends Tariff {
     }
 
     /**
-     * Return description about entities with parameters.
+     * Return description about tariff with parameters.
      *
-     * @return description about entities with parameters
+     * @return description about tariff with parameters
      */
     public String getDescription() {
-        return "Tariff \"" + getName() + "\".  This entities with subscription fee " + getFee() + " per month. Included free " + getIncludedMinutes() + " min. and " +
+        return "Tariff \"" + getName() + "\".  This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludedMinutes() + " min. and " +
                 getIncludedTraffic() + " mbs.";
     }
 
     /**
-     * Return description about entities with parameters.
+     * Return description about tariff with parameters.
      *
-     * @return description about entities with parameters
+     * @return description about tariff with parameters
      */
     @Override
     public String getTariffType() {
@@ -74,6 +74,6 @@ public class FeeTariff extends Tariff {
 
     @Override
     public String toString() {
-        return getName();
+        return getDescription();
     }
 }
