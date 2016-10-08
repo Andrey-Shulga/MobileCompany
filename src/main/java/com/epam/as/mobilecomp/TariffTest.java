@@ -30,7 +30,9 @@ public class TariffTest {
 
             String tariffType = propertyManager.getProperty("tariff." + i + ".type");
             if (tariffType == null) break;
+
             Tariff tariff = factory.getTariff(tariffType);
+
             if (tariff instanceof FeeTariff) {
                 String name = propertyManager.getProperty("tariff." + i + ".name");
                 int fee = propertyManager.getIntProperty("tariff." + i + ".fee");
@@ -57,6 +59,11 @@ public class TariffTest {
         tariffService.printTariffsToConsole(tariffMap);
         tariffService.calculateAllCustomers(tariffMap);
         tariffService.sortTariffsByFee(tariffMap);
-    }
 
+        int fromMin = 150;
+        int toMin = 250;
+        int fromMb = 1000;
+        int toMb = 2500;
+        tariffService.findTariffByParams(tariffMap, fromMin, toMin, fromMb, toMb);
+    }
 }

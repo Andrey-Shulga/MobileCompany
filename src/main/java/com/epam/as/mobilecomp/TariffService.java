@@ -5,7 +5,6 @@ import com.epam.as.mobilecomp.entities.Tariff;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -47,7 +46,7 @@ public class TariffService {
 
     /**
      * Print to console list of tariff sorted by fee.
-     * For sort uses Comparator.
+     * For sort uses sorted collection TreeSet.
      *
      * @param tariffMap the list of tariff
      */
@@ -68,22 +67,24 @@ public class TariffService {
     /**
      * Search entities by parameters' range.
      *
-     * @param list    the list of tariff
+     * @param tariffMap    the list of tariff
      * @param fromMin initial parameter for search minutes
      * @param toMin   finial parameter for search minutes
      * @param fromMbs initial parameter for search megabytes
      * @param toMbs   finial parameter for search megabytes
      */
-    public void findTariffByParams(ArrayList<Tariff> list, int fromMin, int toMin, int fromMbs, int toMbs) {
-        ArrayList<FeeTariff> sortedlist = new ArrayList<FeeTariff>();
-
+    public void findTariffByParams(Map<Tariff, Integer> tariffMap, int fromMin, int toMin, int fromMbs, int toMbs) {
+        Set<FeeTariff> sortedlist = new TreeSet<>();
+        logger.info("Search tariff by range of parameters:");
         //Add to list entities only with fee.
-        for (Tariff selected : list)
-            //  if (selected.isHasFee()) sortedlist.add((FeeTariff) selected);
+        for (Map.Entry m : tariffMap.entrySet())
+            if (m.getKey() instanceof FeeTariff)
+                sortedlist.add((FeeTariff) m.getKey());
+
             for (FeeTariff select : sortedlist) {
                 if ((select.getIncludedMinutes() >= fromMin) && (select.getIncludedMinutes() <= toMin))
                     if ((select.getIncludedTraffic() >= fromMbs) && (select.getIncludedTraffic() <= toMbs))
-                    System.out.println(select.getDescription());
+                        logger.info(select.toString());
         }
     }
 
