@@ -68,6 +68,6 @@ public class WithoutFeeTariff extends Tariff {
 
     @Override
     public String toString() {
-        return getName();
+        return getDescription();
     }
 }

@@ -25,7 +25,7 @@ public class TariffTest {
         MobileCompany company = new MobileCompany("ECell", tariffMap);
         TariffService tariffService = new TariffService();
 
-        //Create tariffs from file tariff.properties.
+        //Create tariffs from file tariff.properties by using Factory method.
         for (int i = 1; i <= tariffCount; i++) {
 
             String tariffType = propertyManager.getProperty("tariff." + i + ".type");
@@ -55,6 +55,8 @@ public class TariffTest {
             tariffMap.put(tariff, company.getTariffNumberOfClients());
         }
         tariffService.printTariffsToConsole(tariffMap);
+        tariffService.calculateAllCustomers(tariffMap);
+        tariffService.sortTariffsByFee(tariffMap);
     }
 
 }

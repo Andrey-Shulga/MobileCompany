@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Actions with tariffs.
@@ -26,43 +26,43 @@ public class TariffService {
         logger.info("The list of all tariffs:");
         for (Map.Entry m : tariffMap.entrySet()) {
             logger.info(m.getKey().toString());
+            logger.info("Customers:" + m.getValue().toString());
         }
+        logger.info("");
     }
 
     /**
      * Print to  number of customers for all tariff.
      *
-     * @param list the list of entities
+     * @param tariffMap the list of entities
      */
-    public void calculateAllCustomers(ArrayList<Tariff> list) {
+    public void calculateAllCustomers(Map<Tariff, Integer> tariffMap) {
         int count = 0;
-        for (Tariff l : list)
-            //   count += l.getCustomers();
-        System.out.println(count);
+        logger.info("Total customers:");
+        for (Map.Entry m : tariffMap.entrySet())
+            count += Integer.parseInt(m.getValue().toString());
+        logger.info(String.valueOf(count));
+        logger.info("");
     }
 
     /**
      * Print to console list of tariff sorted by fee.
      * For sort uses Comparator.
      *
-     * @param list the list of tariff
+     * @param tariffMap the list of tariff
      */
-    public void sortTariffsByFee(ArrayList<Tariff> list) {
-        ArrayList<FeeTariff> sortedlist = new ArrayList<FeeTariff>();
+    public void sortTariffsByFee(Map<Tariff, Integer> tariffMap) {
+        Set<FeeTariff> sortedlist = new TreeSet<>();
+        logger.info("Sort tariffs by fee:");
 
         //Add to list entities only with fee.
-        for (Tariff selected : list)
-            // if (selected.isHasFee()) sortedlist.add((FeeTariff) selected);
+        for (Map.Entry m : tariffMap.entrySet())
+            if (m.getKey() instanceof FeeTariff)
+                sortedlist.add((FeeTariff) m.getKey());
 
-        // Sort list uses Comparator
-            Collections.sort(sortedlist, new Comparator<FeeTariff>() {
-            @Override
-            public int compare(FeeTariff t1, FeeTariff t2) {
-                return t1.getFee() - t2.getFee();
-            }
-        });
         for (FeeTariff sort : sortedlist)
-            System.out.println(sort);
+            logger.info(sort.toString());
+        logger.info("");
     }
 
     /**

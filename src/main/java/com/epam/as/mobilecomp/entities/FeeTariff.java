@@ -3,7 +3,7 @@ package com.epam.as.mobilecomp.entities;
 /**
  * Class for entities with subscription fee.
  */
-public class FeeTariff extends Tariff {
+public class FeeTariff extends Tariff implements Comparable<FeeTariff> {
     private int fee;
     private int includedMinutes;
     private int includedTraffic;
@@ -75,5 +75,10 @@ public class FeeTariff extends Tariff {
     @Override
     public String toString() {
         return getDescription();
+    }
+
+
+    public int compareTo(FeeTariff other) {
+        return Integer.compare(fee, other.fee);
     }
 }
