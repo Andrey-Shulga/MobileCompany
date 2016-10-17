@@ -37,7 +37,7 @@ public class TariffBuilder {
 
                 tariff = factory.getTariff(tariffType);
 
-                if (tariff instanceof FeeTariff) {
+                if (tariff.getTariffType().equals("fee")) {
                     String name = propertyManager.getProperty("tariff." + i + ".name");
                     int fee = propertyManager.getIntProperty("tariff." + i + ".fee");
                     int includedMinutes = propertyManager.getIntProperty("tariff." + i + ".includedMinutes");
@@ -48,7 +48,7 @@ public class TariffBuilder {
                     ((FeeTariff) tariff).setIncludedTraffic(includedTraffic);
                 }
 
-                if (tariff instanceof WithoutFeeTariff) {
+                if (tariff.getTariffType().equals("nofee")) {
                     String name = propertyManager.getProperty("tariff." + i + ".name");
                     int callInNetCost = propertyManager.getIntProperty("tariff." + i + ".CallInNetCost");
                     int callOutNetCosts = propertyManager.getIntProperty("tariff." + i + ".CallOutNetCosts");
