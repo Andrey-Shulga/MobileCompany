@@ -1,4 +1,4 @@
-package com.epam.as.mobilecomp;
+package com.epam.as.mobilecomp.util;
 
 import com.epam.as.mobilecomp.entities.FeeTariff;
 import com.epam.as.mobilecomp.entities.Tariff;
@@ -14,7 +14,7 @@ import java.util.TreeSet;
  */
 public class TariffService {
 
-    Logger logger = LoggerFactory.getLogger("com.epam.as.mobilecomp.TariffService");
+    Logger logger = LoggerFactory.getLogger("com.epam.as.mobilecomp.util.TariffService");
 
     /**
      * Print to console all tariff.
@@ -22,7 +22,7 @@ public class TariffService {
      * @param tariffMap the list of tariff
      */
     public void printTariffsToConsole(Map<Tariff, Integer> tariffMap) {
-        logger.info("The list of all tariffs:");
+
         for (Map.Entry m : tariffMap.entrySet()) {
             logger.info(m.getKey().toString());
             logger.info("Customers:" + m.getValue().toString());
@@ -37,7 +37,7 @@ public class TariffService {
      */
     public void calculateAllCustomers(Map<Tariff, Integer> tariffMap) {
         int count = 0;
-        logger.info("Total customers:");
+
         for (Map.Entry m : tariffMap.entrySet())
             count += Integer.parseInt(m.getValue().toString());
         logger.info(String.valueOf(count));
@@ -52,7 +52,6 @@ public class TariffService {
      */
     public void sortTariffsByFee(Map<Tariff, Integer> tariffMap) {
         Set<FeeTariff> sortedlist = new TreeSet<>();
-        logger.info("Sort tariffs by fee:");
 
         //Add to list entities only with fee.
         for (Map.Entry m : tariffMap.entrySet())
@@ -75,7 +74,7 @@ public class TariffService {
      */
     public void findTariffByParams(Map<Tariff, Integer> tariffMap, int fromMin, int toMin, int fromMbs, int toMbs) {
         Set<FeeTariff> sortedlist = new TreeSet<>();
-        logger.info("Search tariff by range of parameters:");
+
         //Add to list entities only with fee.
         for (Map.Entry m : tariffMap.entrySet())
             if (m.getKey() instanceof FeeTariff)

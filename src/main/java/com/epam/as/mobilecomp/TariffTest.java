@@ -1,16 +1,14 @@
 package com.epam.as.mobilecomp;
 
-import com.epam.as.mobilecomp.entities.FeeTariff;
 import com.epam.as.mobilecomp.entities.Tariff;
-import com.epam.as.mobilecomp.entities.WithoutFeeTariff;
+import com.epam.as.mobilecomp.util.TariffService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import static com.epam.as.mobilecomp.util.PropertyManager.propertyManager;
-
 /**
- * This program demonstrates actions with entities of Mobile Company.
+ * This program tests actions with tariffs of some Mobile Company.
  *
  * @author Andrey Shulga
  * @version 1.0 2016-10-06
@@ -19,51 +17,37 @@ import static com.epam.as.mobilecomp.util.PropertyManager.propertyManager;
 public class TariffTest {
 
     public static void main(String[] args) {
-        final int tariffCount = 9;
-        TariffFactory factory = new TariffFactory();
-        Map<Tariff, Integer> tariffMap = new HashMap<>();
-        MobileCompany company = new MobileCompany("ECell", tariffMap);
+
+        Logger logger = LoggerFactory.getLogger("com.epam.as.mobilecomp.TariffTest");
+
+        // Create tariffs' list
+        Map<Tariff, Integer> tariffList = TariffBuilder.createTariffByProperties();
+
+        //Create new Mobile Company with tariffs' list
+        MobileCompany company = new MobileCompany("ECell", tariffList);
+
+        // Fill each tariff by clients
+        for (Map.Entry<Tariff, Integer> tariff : tariffList.entrySet()) {
+            int clients = company.getTariffNumberOfClients();
+            tariff.setValue(clients);
+        }
+
         TariffService tariffService = new TariffService();
 
-        //Create tariffs from file tariff.properties by using Factory method.
-        for (int i = 1; i <= tariffCount; i++) {
+        logger.info("The list of all tariffs:");
+        tariffService.printTariffsToConsole(tariffList);
 
-            String tariffType = propertyManager.getProperty("tariff." + i + ".type");
-            if (tariffType == null) break;
+        logger.info("Total customers:");
+        tariffService.calculateAllCustomers(tariffList);
 
-            Tariff tariff = factory.getTariff(tariffType);
+        logger.info("Sort tariffs by fee:");
+        tariffService.sortTariffsByFee(tariffList);
 
-            if (tariff instanceof FeeTariff) {
-                String name = propertyManager.getProperty("tariff." + i + ".name");
-                int fee = propertyManager.getIntProperty("tariff." + i + ".fee");
-                int includedMinutes = propertyManager.getIntProperty("tariff." + i + ".includedMinutes");
-                int includedTraffic = propertyManager.getIntProperty("tariff." + i + ".includedTraffics");
-                tariff.setName(name);
-                ((FeeTariff) tariff).setFee(fee);
-                ((FeeTariff) tariff).setIncludedMinutes(includedMinutes);
-                ((FeeTariff) tariff).setIncludedTraffic(includedTraffic);
-            }
-            if (tariff instanceof WithoutFeeTariff) {
-                String name = propertyManager.getProperty("tariff." + i + ".name");
-                int callInNetCost = propertyManager.getIntProperty("tariff." + i + ".CallInNetCost");
-                int callOutNetCosts = propertyManager.getIntProperty("tariff." + i + ".CallOutNetCosts");
-                int trafficMbCost = propertyManager.getIntProperty("tariff." + i + ".TrafficMbCost");
-                tariff.setName(name);
-                ((WithoutFeeTariff) tariff).setCallInNetCost(callInNetCost);
-                ((WithoutFeeTariff) tariff).setCallOutNetCost(callOutNetCosts);
-                ((WithoutFeeTariff) tariff).setTrafficMbCost(trafficMbCost);
-            }
-
-            tariffMap.put(tariff, company.getTariffNumberOfClients());
-        }
-        tariffService.printTariffsToConsole(tariffMap);
-        tariffService.calculateAllCustomers(tariffMap);
-        tariffService.sortTariffsByFee(tariffMap);
-
+        logger.info("Search tariff by range of parameters:");
         int fromMin = 150;
         int toMin = 250;
         int fromMb = 1000;
         int toMb = 2500;
-        tariffService.findTariffByParams(tariffMap, fromMin, toMin, fromMb, toMb);
+        tariffService.findTariffByParams(tariffList, fromMin, toMin, fromMb, toMb);
     }
 }
