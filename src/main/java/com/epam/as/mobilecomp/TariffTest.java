@@ -26,7 +26,7 @@ public class TariffTest {
         //Create new Mobile Company with tariffs' list
         MobileCompany company = new MobileCompany("ECell", tariffList);
 
-        // Fill each tariff by clients
+        // Fill each tariff by clients of mobile company
         for (Map.Entry<Tariff, Integer> tariff : tariffList.entrySet()) {
             int clients = company.getTariffNumberOfClients();
             tariff.setValue(clients);

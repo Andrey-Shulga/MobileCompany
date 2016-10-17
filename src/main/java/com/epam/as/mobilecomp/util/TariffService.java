@@ -31,9 +31,9 @@ public class TariffService {
     }
 
     /**
-     * Print to  number of customers for all tariff.
+     * Print number of customers for all tariff.
      *
-     * @param tariffMap the list of entities
+     * @param tariffMap the list of tariff
      */
     public void calculateAllCustomers(Map<Tariff, Integer> tariffMap) {
         int count = 0;
@@ -45,7 +45,7 @@ public class TariffService {
     }
 
     /**
-     * Print to console list of tariff sorted by fee.
+     * Print list of tariff sorted by fee.
      * For sort uses sorted collection TreeSet.
      *
      * @param tariffMap the list of tariff
@@ -53,7 +53,7 @@ public class TariffService {
     public void sortTariffsByFee(Map<Tariff, Integer> tariffMap) {
         Set<FeeTariff> sortedlist = new TreeSet<>();
 
-        //Add to list entities only with fee.
+        //Add to list tariff only with fee.
         for (Map.Entry m : tariffMap.entrySet())
             if (m.getKey() instanceof FeeTariff)
                 sortedlist.add((FeeTariff) m.getKey());
@@ -64,7 +64,7 @@ public class TariffService {
     }
 
     /**
-     * Search entities by parameters' range.
+     * Search tariffs by parameters' range and print them.
      *
      * @param tariffMap    the list of tariff
      * @param fromMin initial parameter for search minutes
@@ -75,7 +75,7 @@ public class TariffService {
     public void findTariffByParams(Map<Tariff, Integer> tariffMap, int fromMin, int toMin, int fromMbs, int toMbs) {
         Set<FeeTariff> sortedlist = new TreeSet<>();
 
-        //Add to list entities only with fee.
+        //Add to list tariff only with fee.
         for (Map.Entry m : tariffMap.entrySet())
             if (m.getKey() instanceof FeeTariff)
                 sortedlist.add((FeeTariff) m.getKey());

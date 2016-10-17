@@ -11,11 +11,13 @@ public class TariffFactory {
 
     public Tariff getTariff(String tariffType) {
 
-
-        if (tariffType.equals("fee"))
-            return new FeeTariff();
-        else if (tariffType.equals("nofee"))
-            return new WithoutFeeTariff();
-        return null;
+        switch (tariffType) {
+            case "fee":
+                return new FeeTariff();
+            case "nofee":
+                return new WithoutFeeTariff();
+            default:
+                return null;
+        }
     }
 }
