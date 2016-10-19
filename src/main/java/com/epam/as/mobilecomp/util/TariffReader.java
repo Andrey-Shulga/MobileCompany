@@ -1,5 +1,6 @@
-package com.epam.as.mobilecomp;
+package com.epam.as.mobilecomp.util;
 
+import com.epam.as.mobilecomp.TariffFactory;
 import com.epam.as.mobilecomp.entities.FeeTariff;
 import com.epam.as.mobilecomp.entities.Tariff;
 import com.epam.as.mobilecomp.entities.WithoutFeeTariff;
@@ -15,7 +16,7 @@ import static com.epam.as.mobilecomp.util.PropertyManager.propertyManager;
  *
  * @see TariffFactory
  */
-public class TariffBuilder {
+public class TariffReader {
 
     private static int tariffCount = 10;
     private static Tariff tariff;

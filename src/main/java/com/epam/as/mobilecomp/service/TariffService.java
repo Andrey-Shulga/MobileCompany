@@ -1,4 +1,4 @@
-package com.epam.as.mobilecomp.util;
+package com.epam.as.mobilecomp.service;
 
 import com.epam.as.mobilecomp.entities.FeeTariff;
 import com.epam.as.mobilecomp.entities.Tariff;
@@ -14,14 +14,14 @@ import java.util.TreeSet;
  */
 public class TariffService {
 
-    Logger logger = LoggerFactory.getLogger("com.epam.as.mobilecomp.util.TariffService");
+    Logger logger = LoggerFactory.getLogger(TariffService.class);
 
     /**
      * Print to console all tariff.
      *
      * @param tariffMap the list of tariff
      */
-    public void printTariffsToConsole(Map<Tariff, Integer> tariffMap) {
+    public void logAllCompanyTariffs(Map<Tariff, Integer> tariffMap) {
 
         for (Map.Entry m : tariffMap.entrySet()) {
             logger.info(m.getKey().toString());
@@ -31,26 +31,13 @@ public class TariffService {
     }
 
     /**
-     * Print number of customers for all tariff.
-     *
-     * @param tariffMap the list of tariff
-     */
-    public void calculateAllCustomers(Map<Tariff, Integer> tariffMap) {
-        int count = 0;
-
-        for (Map.Entry m : tariffMap.entrySet())
-            count += Integer.parseInt(m.getValue().toString());
-        logger.info(String.valueOf(count));
-        logger.info("");
-    }
-
-    /**
      * Print list of tariff sorted by fee.
      * For sort uses sorted collection TreeSet.
      *
      * @param tariffMap the list of tariff
+     * @return the list of tariffs sorted by monthly fee
      */
-    public void sortTariffsByFee(Map<Tariff, Integer> tariffMap) {
+    public Set<FeeTariff> SortTariffsByFee(Map<Tariff, Integer> tariffMap) {
         Set<FeeTariff> sortedlist = new TreeSet<>();
 
         //Add to list tariff only with fee.
@@ -58,9 +45,7 @@ public class TariffService {
             if (m.getKey() instanceof FeeTariff)
                 sortedlist.add((FeeTariff) m.getKey());
 
-        for (FeeTariff sort : sortedlist)
-            logger.info(sort.toString());
-        logger.info("");
+        return sortedlist;
     }
 
     /**
@@ -71,20 +56,24 @@ public class TariffService {
      * @param toMin   finial parameter for search minutes
      * @param fromMbs initial parameter for search megabytes
      * @param toMbs   finial parameter for search megabytes
+     * @return the list of tariffs selected by parameters
      */
-    public void findTariffByParams(Map<Tariff, Integer> tariffMap, int fromMin, int toMin, int fromMbs, int toMbs) {
-        Set<FeeTariff> sortedlist = new TreeSet<>();
+    public Set<FeeTariff> findTariffByParams(Map<Tariff, Integer> tariffMap, int fromMin, int toMin, int fromMbs, int toMbs) {
+        Set<FeeTariff> tariffList = new TreeSet<>();
+        Set<FeeTariff> selectedlist = new TreeSet<>();
 
         //Add to list tariff only with fee.
         for (Map.Entry m : tariffMap.entrySet())
             if (m.getKey() instanceof FeeTariff)
-                sortedlist.add((FeeTariff) m.getKey());
+                tariffList.add((FeeTariff) m.getKey());
 
-            for (FeeTariff select : sortedlist) {
+        for (FeeTariff select : tariffList) {
                 if ((select.getIncludedMinutes() >= fromMin) && (select.getIncludedMinutes() <= toMin))
                     if ((select.getIncludedTraffic() >= fromMbs) && (select.getIncludedTraffic() <= toMbs))
-                        logger.info(select.toString());
+                        selectedlist.add(select);
+
         }
+        return selectedlist;
     }
 
 }
