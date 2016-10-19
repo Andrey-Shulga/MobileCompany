@@ -15,13 +15,14 @@ public class FeeTariff extends Tariff implements Comparable<FeeTariff> {
     /**
      * Construct new tariff with fee.
      *
+     * @param id the ID for tariff
      * @param name           the name of new tariff
      * @param fee            cost of fee per month.
      * @param includedMinutes number of free time (minutes) included in entities
      * @param includedTraffic number of free traffic (mbytes) included in entities
      */
-    public FeeTariff(String name, int fee, int includedMinutes, int includedTraffic) {
-        super(name);
+    public FeeTariff(int id, String name, int fee, int includedMinutes, int includedTraffic) {
+        super(id, name);
         this.fee = fee;
         this.includedMinutes = includedMinutes;
         this.includedTraffic = includedTraffic;
@@ -58,7 +59,7 @@ public class FeeTariff extends Tariff implements Comparable<FeeTariff> {
      * @return description about tariff with parameters
      */
     public String getDescription() {
-        return "Tariff \"" + getName() + "\".  This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludedMinutes() + " min. and " +
+        return "Tariff " + getId() + " \"" + getName() + "\".  This tariff with subscription fee " + getFee() + " per month. Included free " + getIncludedMinutes() + " min. and " +
                 getIncludedTraffic() + " mbs.";
     }
 

@@ -37,12 +37,15 @@ public class TariffReader {
             if ((tariffType.equals("fee")) || (tariffType.equals("nofee"))) {
 
                 tariff = factory.getTariff(tariffType);
+                int id = i;
 
                 if (tariff.getTariffType().equals("fee")) {
+
                     String name = propertyManager.getProperty("tariff." + i + ".name");
                     int fee = propertyManager.getIntProperty("tariff." + i + ".fee");
                     int includedMinutes = propertyManager.getIntProperty("tariff." + i + ".includedMinutes");
                     int includedTraffic = propertyManager.getIntProperty("tariff." + i + ".includedTraffics");
+                    tariff.setId(id);
                     tariff.setName(name);
                     ((FeeTariff) tariff).setFee(fee);
                     ((FeeTariff) tariff).setIncludedMinutes(includedMinutes);
@@ -50,10 +53,12 @@ public class TariffReader {
                 }
 
                 if (tariff.getTariffType().equals("nofee")) {
+
                     String name = propertyManager.getProperty("tariff." + i + ".name");
                     int callInNetCost = propertyManager.getIntProperty("tariff." + i + ".CallInNetCost");
                     int callOutNetCosts = propertyManager.getIntProperty("tariff." + i + ".CallOutNetCosts");
                     int trafficMbCost = propertyManager.getIntProperty("tariff." + i + ".TrafficMbCost");
+                    tariff.setId(id);
                     tariff.setName(name);
                     ((WithoutFeeTariff) tariff).setCallInNetCost(callInNetCost);
                     ((WithoutFeeTariff) tariff).setCallOutNetCost(callOutNetCosts);

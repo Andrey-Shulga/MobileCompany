@@ -6,6 +6,7 @@ package com.epam.as.mobilecomp.entities;
 public abstract class Tariff {
 
     private String name;
+    private int id;
 
 
     public Tariff() {
@@ -14,10 +15,20 @@ public abstract class Tariff {
     /**
      * Construct new tariff with fee.
      *
+     * @param id the ID for tariff
      * @param name the name of new tariff
      */
-    public Tariff(String name) {
+    public Tariff(int id, String name) {
+        this.id = id;
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -43,12 +54,15 @@ public abstract class Tariff {
 
         Tariff tariff = (Tariff) o;
 
+        if (id != tariff.id) return false;
         return name.equals(tariff.name);
 
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result = name.hashCode();
+        result = 31 * result + id;
+        return result;
     }
 }
